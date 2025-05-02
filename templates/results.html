@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validation Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Validation Complete</h1>
+        
+        <div class="results">
+            <h2>Validation Statistics</h2>
+            <table class="stats-table">
+                <tr>
+                    <th>Status</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+                <tr>
+                    <td>Valid</td>
+                    <td>{{ stats.valid }}</td>
+                    <td>{{ "%.1f"|format((stats.valid/stats.total)*100) }}%</td>
+                </tr>
+                <tr>
+                    <td>Bounce</td>
+                    <td>{{ stats.bounce }}</td>
+                    <td>{{ "%.1f"|format((stats.bounce/stats.total)*100) }}%</td>
+                </tr>
+                <tr>
+                    <td>Catch-All</td>
+                    <td>{{ stats.catch_all }}</td>
+                    <td>{{ "%.1f"|format((stats.catch_all/stats.total)*100) }}%</td>
+                </tr>
+                <tr>
+                    <td>Invalid Format</td>
+                    <td>{{ stats.invalid_format }}</td>
+                    <td>{{ "%.1f"|format((stats.invalid_format/stats.total)*100) }}%</td>
+                </tr>
+                <tr>
+                    <td>Invalid Domain</td>
+                    <td>{{ stats.invalid_domain }}</td>
+                    <td>{{ "%.1f"|format((stats.invalid_domain/stats.total)*100) }}%</td>
+                </tr>
+                <tr>
+                    <td>SMTP Error</td>
+                    <td>{{ stats.smtp_error }}</td>
+                    <td>{{ "%.1f"|format((stats.smtp_error/stats.total)*100) }}%</td>
+                </tr>
+                <tr>
+                    <td>Unknown Error</td>
+                    <td>{{ stats.unknown }}</td>
+                    <td>{{ "%.1f"|format((stats.unknown/stats.total)*100) }}%</td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <th>{{ stats.total }}</th>
+                    <th>100%</th>
+                </tr>
+            </table>
+            
+            <div class="processing-time">
+                Processing time: {{ processing_time }} seconds
+            </div>
+        </div>
+        
+        <div class="actions">
+            <a href="{{ url_for('download', filename=filename) }}" class="btn">Download Full Results (CSV)</a>
+            <a href="{{ url_for('index') }}" class="btn">Validate Another File</a>
+        </div>
+    </div>
+</body>
+</html>

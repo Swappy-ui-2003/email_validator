@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Validator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced Email Validator</h1>
+        <p>Upload a CSV file containing email addresses to validate them.</p>
+        
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <form class="upload-form" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv" required>
+            <button type="submit" class="btn">Validate Emails</button>
+        </form>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ul>
+                <li>CSV file must contain a column named "Email" or "email"</li>
+                <li>Only one email per row</li>
+                <li>Processing may take some time for large files</li>
+                <li>Validation includes: Format check, DNS check, SMTP verification, and catch-all detection</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
